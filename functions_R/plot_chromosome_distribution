@@ -1,5 +1,6 @@
-## function to plot chromosome distribution (chr_dist_plot) -----
-#This plots %CpGs sites per chromosome. data has to be a dataframe with one column called "Chr". 
+## function to make a barplot of the %CpG sites per chromosome (chr_dist_plot) -----
+#This plots %CpGs sites per chromosome. data has to be a dataframe with CpG sites and respectful chromosome ('Chr').
+
 chr_dist_plot <- function(data) {
   chr_names <- paste0("chr",1:22)
   tmp <- as.data.frame(table(data$Chr))
@@ -11,12 +12,12 @@ chr_dist_plot <- function(data) {
   tmp$Percentage <- tmp$Percentage*100
   tmp$Var1 <- factor(tmp$Var1, levels = chr_names)
   tmp <- tmp[match(chr_names, tmp$Var1), ]
-  #change different colors of the plot if it is for Sadikovic or Weksberg 
+  #change colors of the bar plot according to the legend
   if (str_detect(namesEsigs_to_syndrome[[deparse(substitute(data))]], "Sadikovic")) {
     fill <- "#66c2a5"
   } else if(str_detect(namesEsigs_to_syndrome[[deparse(substitute(data))]], "Weksberg")) {
     fill <- "#fc8d62"}
-  #plots
+  #plot
   tmp <- ggplot(tmp, aes(Var1, Percentage)) +
     theme_minimal() +
     ylim(0,15) +
