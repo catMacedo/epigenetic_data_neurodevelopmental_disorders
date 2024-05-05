@@ -1,3 +1,7 @@
+## load libraries ------
+library(stringr)
+library(ggplot2)
+
 ## function to make a barplot of the %CpG sites per chromosome (chr_dist_plot) -----
 #This plots %CpGs sites per chromosome. data has to be a dataframe with CpG sites and respectful chromosome ('Chr').
 
