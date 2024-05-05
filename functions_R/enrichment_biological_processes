@@ -2,6 +2,7 @@
 library(enrichR)
 library(dplyr)
 library(GO.db)
+library(GSEABase)
 
 ## function for enriched GO BPs biological processes -----
 #data is a dataframe with a column of gene ontology terms
