@@ -1,3 +1,7 @@
+## load libraries -----
+library(annotatr)
+library(GenomicRanges)
+
 ## build hg19 annotations ----
 annotations<- build_annotations(genome = 'hg19',c('hg19_basicgenes','hg19_genes_intergenic'))
 
