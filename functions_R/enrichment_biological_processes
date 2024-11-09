@@ -5,17 +5,20 @@ library(GO.db)
 library(GSEABase)
 
 ## function for enriched GO BPs biological processes -----
-#data is a dataframe with a column of gene ontology terms
+# data is a dataframe with a column of gene ontology terms
+# annot.symbol corresponds to the gene symbols
+
 enriched_GOBP <- function(data){
   tmp <- enrichr(data$annot.symbol,"GO_Biological_Process_2021")
   tmp <- filter(tmp[["GO_Biological_Process_2021"]], P.value<=0.05)
   return(tmp)}
 
-#goslim_agr.obo can be downloaded from https://geneontology.org/docs/download-ontology/#subsets 
+# goslim_agr.obo can be downloaded from https://geneontology.org/docs/download-ontology/#subsets 
 slim <- getOBOCollection("/filepath/goslim_agr.obo")
 
 ## function for enriched GO BPs (slim names) biological processes -----
-#data is a df with a column with gene symbols (annot.symbol). 
+# data is a df with a column with gene symbols (annot.symbol). 
+
 enriched_GOBP_slim <- function(data){
     tmp <- enrichr(data$annot.symbol,"GO_Biological_Process_2021")
     tmp <- filter(tmp[["GO_Biological_Process_2021"]], P.value<=0.05)
@@ -28,6 +31,6 @@ enriched_GOBP_slim <- function(data){
     tmp <- goSlim(myCollection,slim,"BP")
     #describes associations between GO BP terms and their offspring terms
     goMap <- as.list(GOBPOFFSPRING[rownames(tmp)])
-    #in order to know which go terms were grouped for the same slim go term
+    #in order to know which GO terms were grouped for the same slim go term
     tmp$ids <- lapply(goMap, intersect, ids(myCollection))
     return(tmp)}
